@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
@@ -39,7 +38,7 @@ const Index = () => {
       name: "Butter Croissant",
       description: "Flaky, buttery croissants made with premium French butter.",
       price: "$3.99",
-      image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&q=80&w=1726",
+      image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&q=80&w=1926",
     },
     {
       id: 5,
@@ -218,13 +217,19 @@ const Index = () => {
               "https://images.unsplash.com/photo-1606663889134-b1dedb5ed8b7?auto=format&fit=crop&q=80&w=1974",
               "https://images.unsplash.com/photo-1612203985729-70726954388c?auto=format&fit=crop&q=80&w=1964",
               "https://images.unsplash.com/photo-1464195244916-405fa0a82545?auto=format&fit=crop&q=80&w=2080",
-              "https://images.unsplash.com/photo-1484116021483-6e444d6bdbc3?auto=format&fit=crop&q=80&w=2080",
+              "https://images.unsplash.com/photo-1484116021483-6e444d6bdbc3?ixlib=rb-4.0.3&auto=format&fit=crop&q=80&w=2080",
             ].map((image, index) => (
               <div key={index} className="overflow-hidden rounded-lg hover:shadow-xl transition-all duration-300 group">
                 <img
                   src={image}
                   alt={`Gallery image ${index + 1}`}
                   className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+                  loading="lazy"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "https://images.unsplash.com/photo-1609587312208-cea54be969e7?auto=format&fit=crop&q=80&w=1740"; // Fallback image
+                    console.log(`Failed to load gallery image ${index + 1}, using fallback`);
+                  }}
                 />
               </div>
             ))}
